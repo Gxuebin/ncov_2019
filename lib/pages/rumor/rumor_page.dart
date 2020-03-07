@@ -114,11 +114,13 @@ class _RumorPageState extends State<RumorPage>
               ),
             ),
             new Visibility(
-              visible: strNoEmpty(statisticsModel?.dailyPic ?? ''),
-              child: new Padding(
-                padding: EdgeInsets.only(bottom: 10.0),
-                child: new CachedNetworkImage(
-                    imageUrl: statisticsModel?.dailyPic ?? defImg),
+              visible: listNoEmpty(statisticsModel?.dailyPics),
+              child: new Column(
+                children: listNoEmpty(statisticsModel?.dailyPics)
+                    ? statisticsModel.dailyPics.map((pics) {
+                        return new CachedNetworkImage(imageUrl: pics);
+                      }).toList()
+                    : [],
               ),
             ),
             new Space(),
